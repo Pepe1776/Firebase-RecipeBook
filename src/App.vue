@@ -18,9 +18,8 @@
   --green-darker: #1B3A4B;
   --green-darkest: #212F45;
   --light: #006466;
-
-
 }
+
 
 * {
   margin: 0;
@@ -28,9 +27,20 @@
   box-sizing: border-box;
  font-family: 'Manrope', sans-serif;
 }
-body {
- background: rgb(209, 45, 195);
- background: radial-gradient(circle, rgb(1, 182, 214) 0%, rgba(238, 0, 178, 0.589) 100%);
+.container {
+  padding: 50px;
+  height: 800px;
+  width: 100vw;
+background-image: linear-gradient(
+  to bottom right,
+  #4affde 0%, #5b9dff 40%, #d06bff 60%, #ff34d2 100%
+);
+background-size: 200% 200%;
+animation: movingGradient 5s linear infinite alternate;
+}
+@keyframes movingGradient {
+  from { background-position: 0 0; }
+  to { background-position: 100% 100%; }
 }
 a {
   color: #000000;

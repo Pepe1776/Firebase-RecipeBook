@@ -4,21 +4,24 @@
       <thead>
         <tr>
           <th scope="col">Name</th>
-          <th scope="col">Email</th>
+          <th scope="col">description</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="{ id, name, email } in users" :key="id">
+        <tr v-for="{ id, name, description } in recipes" :key="id">
           <td>{{ name }}</td>
-          <td>{{ email }}</td>
+          <td>{{ description }}</td>
           <td>
+            <router-link :to="`/recipe/${id}`">
+              <button>View Recipe</button>
+            </router-link>
             <router-link :to="`/edit/${id}`">
               <button class="btn btn-primary btn-sm me-2">
                 Edit
               </button>
             </router-link>
-            <button class="btn btn-danger btn-sm" @click="deleteUser(id)">
+            <button class="btn btn-danger btn-sm" @click="deleterecipe(id)">
               Delete
             </button>
           </td>
@@ -29,12 +32,11 @@
 </template>
 
 <script>
-import { useLoadUsers, deleteUser } from '@/firebase'
-
+import { useLoadrecipes, deleterecipe } from '@/firebase'
 export default {
   setup() {
-    const users = useLoadUsers()
-    return { users, deleteUser }
+    const recipes = useLoadrecipes()
+    return { recipes, deleterecipe }
   }
 }
 </script>

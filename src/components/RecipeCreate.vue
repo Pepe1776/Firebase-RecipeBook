@@ -1,20 +1,14 @@
 <template>
   <div class="card card-body mt-4">
-    <h3>Edit recipes</h3>
-    <form @submit.prevent="update">
+    <form @submit.prevent="onSubmit">
       <div class="form-group">
         <label>Name</label>
         <input v-model="form.name" class="form-control" required />
       </div>
 
       <div class="form-group mt-3">
-        <label>description</label>
-        <textarea
-          v-model="form.description"
-          class="form-control"
-          type="email"
-          required
-        />
+        <label>Description</label>
+        <textarea v-model="form.description" class="form-control" required />
       </div>
 
       <div class="form-group mt-3">
@@ -27,6 +21,7 @@
             required
           />
         </div>
+        <button type="button" @click="addNewIngredient">Add Ingredient</button>
       </div>
       <div class="form-group mt-3">
         <label>Methods</label>
@@ -38,53 +33,47 @@
             required
           />
         </div>
+        <button type="button" @click="addNewStep">Add Step</button>
       </div>
 
-      <button type="submit" class="btn btn-primary  mt-3">
-        Update
+      <button type="submit" class="btn btn-success mt-3">
+        Create recipe
       </button>
     </form>
   </div>
 </template>
 
 <script>
-import { reactive, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { getrecipe, updaterecipe } from '@/firebase'
+import { createrecipe } from '@/firebase'
+import { reactive } from 'vue'
 
 export default {
   setup() {
-    const router = useRouter()
-    const route = useRoute()
-    const recipeId = computed(() => route.params.id)
-
     const form = reactive({
       name: '',
-      descrition: '',
+      description: '',
       ingredients: [],
       methods: [],
       ingredientRows: 1,
       methodRows: 1
     })
-    onMounted(async () => {
-      const recipe = await getrecipe(recipeId.value)
-      console.log(recipe, recipeId.value)
-      form.name = recipe.name
-      form.description = recipe.description
-      form.ingredients = recipe.ingredients
-      form.methods = recipe.methods
-      form.ingredientRows = recipe.ingredientRows
-      form.methodRows = recipe.methodRows
-    })
 
-    const update = async () => {
-      await updaterecipe(recipeId.value, { ...form })
-      router.push('/')
+    const onSubmit = async () => {
+      await createrecipe({ ...form })
       form.name = ''
-      form.email = ''
+      form.description = ''
+      form.ingredients = []
+      form.methods = []
+      form.ingredientRows = 1
+      form.methodRows = 1
     }
-
-    return { form, update }
+    const addNewIngredient = () => {
+      form.ingredientRows++
+    }
+    const addNewStep = () => {
+      form.methodRows++
+    }
+    return { form, onSubmit, addNewIngredient, addNewStep }
   }
 }
 </script>

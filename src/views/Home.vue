@@ -1,14 +1,14 @@
 <template>
-  <UserCreate />
-  <UserList />
+  <recipeCreate />
+  <recipeList />
 </template>
 
 <script>
-import UserCreate from '@/components/UserCreate.vue'
-import UserList from '@/components/UserList.vue'
+import recipeCreate from '@/components/RecipeCreate.vue'
+import recipeList from '@/components/RecipeList.vue'
 
 export default {
   name: 'Home',
-  components: { UserCreate, UserList }
+  components: { recipeCreate, recipeList }
 }
 </script>
