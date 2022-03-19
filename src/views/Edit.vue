@@ -1,4 +1,5 @@
 <template>
+  <router-link to="/">&lt; Back</router-link>
   <div class="card card-body mt-4">
     <h3>Edit recipes</h3>
     <form @submit.prevent="update">

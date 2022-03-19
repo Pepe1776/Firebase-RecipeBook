@@ -17,11 +17,11 @@
               <button>View Recipe</button>
             </router-link>
             <router-link :to="`/edit/${id}`">
-              <button class="btn btn-primary btn-sm me-2">
+              <button class="edit">
                 Edit
               </button>
             </router-link>
-            <button class="btn btn-danger btn-sm" @click="deleterecipe(id)">
+            <button class="delete" @click="deleterecipe(id)">
               Delete
             </button>
           </td>

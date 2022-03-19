@@ -1,4 +1,5 @@
 <template>
+  <router-link to="/">&lt; Back</router-link>
   <div class="card card-body mt-4">
     <form @submit.prevent="onSubmit">
       <div class="form-group">
@@ -36,7 +37,7 @@
         <button type="button" @click="addNewStep">Add Step</button>
       </div>
 
-      <button type="submit" class="btn btn-success mt-3">
+      <button type="submit" class="create">
         Create recipe
       </button>
     </form>
@@ -77,3 +78,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.create {
+  background-color: rgb(153, 9, 236);
+  color: white;
+}
+</style>

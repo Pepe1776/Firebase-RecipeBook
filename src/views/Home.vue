@@ -1,14 +1,13 @@
 <template>
-  <recipeCreate />
+  <router-link to="/add"><button>Add a Recipe</button></router-link>
   <recipeList />
 </template>
 
 <script>
-import recipeCreate from '@/components/RecipeCreate.vue'
 import recipeList from '@/components/RecipeList.vue'
 
 export default {
   name: 'Home',
-  components: { recipeCreate, recipeList }
+  components: { recipeList }
 }
 </script>
