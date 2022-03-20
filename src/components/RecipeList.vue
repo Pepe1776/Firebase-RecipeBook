@@ -19,14 +19,14 @@
             <td class="list-desc">{{ description }}</td>
             <td>
               <router-link :to="`/recipe/${id}`">
-                <button>View Recipe</button>
+                <button class="btn">View Recipe</button>
               </router-link>
               <router-link :to="`/edit/${id}`">
-                <button class="edit">
+                <button class="btn edit">
                   Edit
                 </button>
               </router-link>
-              <button class="delete" @click="deleterecipe(id)">
+              <button class=" btn delete" @click="deleterecipe(id)">
                 Delete
               </button>
             </td>
@@ -79,17 +79,20 @@ export default {
 
 /* Style the counter cards */
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  box-shadow: 0 8px 18px 0 rgba(0, 228, 245, 0.8);
   padding: 16px;
   text-align: center;
-  background-color: rgb(205, 212, 211);
+  background-color: var(--light);
 }
 .list-name {
   font-size: 1.5rem;
+  font-family: 'lobster', cursive;
   margin: 1rem;
 }
 .list-desc {
   font-size: 1.3rem;
+   font-family: 'righteous', cursive;
   margin: 1rem;
 }
 </style>

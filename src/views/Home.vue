@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <router-link to="/add"><button>Add a Recipe</button></router-link>
+    <router-link class="add" to="/add"
+      ><button class="add">Add a Recipe</button></router-link
+    >
     <recipeList />
   </div>
 </template>
@@ -13,4 +15,14 @@ export default {
   components: { recipeList }
 }
 </script>
-<style></style>
+<style>
+.container {
+  display: relative;
+}
+.add {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

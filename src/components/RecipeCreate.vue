@@ -22,7 +22,9 @@
             required
           />
         </div>
-        <button type="button" @click="addNewIngredient">Add Ingredient</button>
+        <button class="" type="button" @click="addNewIngredient">
+          Add Ingredient
+        </button>
       </div>
       <div class="form-group mt-3">
         <label>Methods</label>
@@ -81,7 +83,27 @@ export default {
 
 <style>
 .create {
-  background-color: rgb(153, 9, 236);
-  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.btn::before,
+.btn::after {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.btn::after {
+  background-color: #292929;
+}
+.btn::before {
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  transition: transform 200ms;
+}
+.btn:hover::before,
+.btn:focus::before {
+  transform: scale(1.1);
 }
 </style>
