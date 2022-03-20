@@ -1,19 +1,19 @@
 <template>
-  <router-link to="/">&lt; Back</router-link>
+  <router-link class="back" to="/">&lt; Back</router-link>
   <div class="card card-body mt-4">
     <form @submit.prevent="onSubmit">
       <div class="form-group">
-        <label>Name</label>
+        <label class="label">Name</label>
         <input v-model="form.name" class="form-control" required />
       </div>
 
       <div class="form-group mt-3">
-        <label>Description</label>
+        <label class="label">Description</label>
         <textarea v-model="form.description" class="form-control" required />
       </div>
 
       <div class="form-group mt-3">
-        <label>Ingredients</label>
+        <label class="label">Ingredients</label>
         <div class="ingredient" v-for="i in form.ingredientRows" :key="i">
           <input
             v-model="form.ingredients[i - 1]"
@@ -27,7 +27,7 @@
         </button>
       </div>
       <div class="form-group mt-3">
-        <label>Methods</label>
+        <label class="label">Methods</label>
         <div class="method" v-for="i in form.methodRows" :key="i">
           <input
             v-model="form.methods[i - 1]"
@@ -37,6 +37,10 @@
           />
         </div>
         <button type="button" @click="addNewStep">Add Step</button>
+      </div>
+      <div class="image form-group">
+        <label class="label" for="image url">Image Url</label>
+        <input type="text" v-model="form.image" class="form-control" />
       </div>
 
       <button type="submit" class="create">
@@ -58,7 +62,8 @@ export default {
       ingredients: [],
       methods: [],
       ingredientRows: 1,
-      methodRows: 1
+      methodRows: 1,
+      image: ''
     })
 
     const onSubmit = async () => {
@@ -69,6 +74,7 @@ export default {
       form.methods = []
       form.ingredientRows = 1
       form.methodRows = 1
+      form.image = ''
     }
     const addNewIngredient = () => {
       form.ingredientRows++
@@ -82,9 +88,49 @@ export default {
 </script>
 
 <style>
+.back {
+  font-family: "lobster", cursive;
+  font-size: 2.2rem;
+  margin-left: 1rem;
+  text-decoration: none;
+  transition: all 0.5s ease;
+}
+.back:hover {
+  color: var(--blue-darkest);
+  text-shadow: 0 8px 18px var(--main);
+  border-radius: 30px;
+  padding: 5px;
+  transform: scale(1.02);
+}
+label {
+  font-family: 'righteous', cursive;
+  font-size: 1.4rem;
+}
+.label {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form-control {
+  width: 70vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.method {
+  display: flex;
+}
 .create {
   display: flex;
   justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
 }
 
 .btn::before,

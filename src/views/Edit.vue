@@ -1,7 +1,7 @@
 <template>
-  <router-link to="/">&lt; Back</router-link>
+  <router-link class="back" to="/">&lt; Back</router-link>
   <div class="card card-body mt-4">
-    <h3>Edit recipes</h3>
+    <h3 class="title">Edit your recipe</h3>
     <form @submit.prevent="update">
       <div class="form-group">
         <label>Name</label>
@@ -41,7 +41,12 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary  mt-3">
+      <div class="form-group">
+        <label>Image Url</label>
+        <input v-model="form.image" class="form-control" required />
+      </div>
+
+      <button type="submit" class="">
         Update
       </button>
     </form>
@@ -61,11 +66,12 @@ export default {
 
     const form = reactive({
       name: '',
-      descrition: '',
+      description: '',
       ingredients: [],
       methods: [],
       ingredientRows: 1,
-      methodRows: 1
+      methodRows: 1,
+      image: ''
     })
     onMounted(async () => {
       const recipe = await getrecipe(recipeId.value)
@@ -76,13 +82,19 @@ export default {
       form.methods = recipe.methods
       form.ingredientRows = recipe.ingredientRows
       form.methodRows = recipe.methodRows
+      form.image = recipe.image
     })
 
     const update = async () => {
       await updaterecipe(recipeId.value, { ...form })
       router.push('/')
       form.name = ''
-      form.email = ''
+      form.description = ''
+      form.ingredients = []
+      form.methods = []
+      form.ingredientRows = 1
+      form.methodRows = 1
+      form.image = ''
     }
 
     return { form, update }
@@ -91,6 +103,15 @@ export default {
 </script>
 
 <style>
+.title {
+   font-family: 'lobster', cursive;
+  font-size: 3.5rem;
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+  margin-bottom: 3rem;
+  text-shadow: 0px 8px 20px #04d3e2, 2px 10px 30px rgba(34, 250, 185, 0.986);
+}
 .btn::before,
 .btn::after {
   content: '';

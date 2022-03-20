@@ -12,21 +12,24 @@
         <div class="column">
           <div
             class="card"
-            v-for="{ id, name, description } in recipes"
+            v-for="{ id, name, description, image } in recipes"
             :key="id"
           >
             <td class="list-name">{{ name }}</td>
             <td class="list-desc">{{ description }}</td>
+            <td class="list-desc">
+              <img :src="`${image}`" class="image" />
+            </td>
             <td>
               <router-link :to="`/recipe/${id}`">
-                <button class="btn">View Recipe</button>
+                <button class="">View Recipe</button>
               </router-link>
               <router-link :to="`/edit/${id}`">
-                <button class="btn edit">
+                <button class="edit">
                   Edit
                 </button>
               </router-link>
-              <button class=" btn delete" @click="deleterecipe(id)">
+              <button class="delete" @click="deleterecipe(id)">
                 Delete
               </button>
             </td>
@@ -42,7 +45,8 @@ import { useLoadrecipes, deleterecipe } from '@/firebase'
 export default {
   setup() {
     const recipes = useLoadrecipes()
-    return { recipes, deleterecipe }
+    const deleteToggle = false
+    return { recipes, deleterecipe, deleteToggle }
   }
 }
 </script>
@@ -83,7 +87,7 @@ export default {
   box-shadow: 0 8px 18px 0 rgba(0, 228, 245, 0.8);
   padding: 16px;
   text-align: center;
-  background-color: var(--light);
+  background-color: rgb(221, 250, 234);
 }
 .list-name {
   font-size: 1.5rem;
@@ -92,7 +96,11 @@ export default {
 }
 .list-desc {
   font-size: 1.3rem;
-   font-family: 'righteous', cursive;
+  font-family: 'righteous', cursive;
   margin: 1rem;
+}
+.image {
+  width: 200px;
+  border-radius: 30px;
 }
 </style>
