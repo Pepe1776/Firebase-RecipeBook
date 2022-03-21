@@ -28,9 +28,12 @@
             required
           />
         </div>
+        <button class="" type="button" @click="addNewIngredient">
+          Add Ingredient
+        </button>
       </div>
       <div class="form-group mt-3">
-        <label>Methods</label>
+        <label>Steps</label>
         <div class="method" v-for="i in form.methodRows" :key="i">
           <input
             v-model="form.methods[i - 1]"
@@ -39,16 +42,18 @@
             required
           />
         </div>
+        <button type="button" @click="addNewStep">Add Step</button>
       </div>
 
       <div class="form-group">
         <label>Image Url</label>
         <input v-model="form.image" class="form-control" required />
       </div>
-
-      <button type="submit" class="">
-        Update
-      </button>
+      <div class="button-con">
+        <button type="submit" class="create">
+          Update
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -96,8 +101,14 @@ export default {
       form.methodRows = 1
       form.image = ''
     }
+    const addNewIngredient = () => {
+      form.ingredientRows++
+    }
+    const addNewStep = () => {
+      form.methodRows++
+    }
 
-    return { form, update }
+    return { form, update, addNewIngredient, addNewStep }
   }
 }
 </script>

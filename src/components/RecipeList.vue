@@ -6,10 +6,14 @@
         v-for="{ id, name, description, image } in recipes"
         :key="id"
       >
-        <td class="list-name">{{ name }}</td>
+        <td class="list-name">
+          <router-link :to="`/recipe/${id}`">{{ name }}</router-link>
+        </td>
         <td class="list-desc">{{ description }}</td>
         <td class="list-desc">
-          <img :src="`${image}`" class="image" />
+          <router-link :to="`/recipe/${id}`"
+            ><img :src="`${image}`" class="image"
+          /></router-link>
         </td>
         <td>
           <router-link :to="`/recipe/${id}`">
@@ -131,6 +135,9 @@ export default {
 
 /* Style the counter cards */
 .card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 20px;
   box-shadow: 0 8px 18px 0 rgba(0, 228, 245, 0.8);
   padding: 16px;
@@ -173,5 +180,8 @@ export default {
 .popup-inner {
   background: #fff;
   padding: 32px;
+}
+a:hover {
+  color: var(--blue-dark);
 }
 </style>
