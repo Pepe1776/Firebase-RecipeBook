@@ -98,6 +98,17 @@ export default {
   justify-content: center;
   border-radius: 30px;
 }
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .image {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+}
 .recipe {
   padding: 1rem;
   max-width: 768px;

@@ -1,66 +1,62 @@
 <template>
   <div class="container">
     <div class="grid">
-      <div class="row">
-        <div class="column">
-          <div
-            class="card"
-            v-for="{ id, name, description, image } in recipes"
-            :key="id"
-          >
-            <td class="list-name">{{ name }}</td>
-            <td class="list-desc">{{ description }}</td>
-            <td class="list-desc">
-              <img :src="`${image}`" class="image" />
-            </td>
-            <td>
-              <router-link :to="`/recipe/${id}`">
-                <button class="">View Recipe</button>
-              </router-link>
-              <router-link :to="`/edit/${id}`">
-                <button class="edit">
-                  Edit
-                </button>
-              </router-link>
-              <router-link :to="`/delete/${id}`">
-                <button class="delete">
-                  Delete
-                </button>
-              </router-link>
-              <!-- <button
+      <div
+        class="card"
+        v-for="{ id, name, description, image } in recipes"
+        :key="id"
+      >
+        <td class="list-name">{{ name }}</td>
+        <td class="list-desc">{{ description }}</td>
+        <td class="list-desc">
+          <img :src="`${image}`" class="image" />
+        </td>
+        <td>
+          <router-link :to="`/recipe/${id}`">
+            <button class="">View Recipe</button>
+          </router-link>
+          <router-link :to="`/edit/${id}`">
+            <button class="edit">
+              Edit
+            </button>
+          </router-link>
+          <router-link :to="`/delete/${id}`">
+            <button class="delete">
+              Delete
+            </button>
+          </router-link>
+          <!-- <button
                 class="delete"
                 @click="() => TogglePopup('buttonTrigger')"
               >
                 Delete
               </button> -->
-              <!-- <button class="delete" @click="deleterecipe(id)">
+          <!-- <button class="delete" @click="deleterecipe(id)">
                 Delete
               </button> -->
-            </td>
-          </div>
-        </div>
+        </td>
       </div>
     </div>
-    <div
-      class="popup"
-      id="popup"
-      v-if="popupTriggers.buttonTrigger"
-      :TogglePopup="() => TogglePopup('buttonTrigger')"
-    >
-      <div class="popup-inner">
-        <h2 class="pop-text">Are you sure you want to delete?</h2>
-        <button
-          :key="id"
-          v-for="{ id, name } in recipes"
-          class="delete"
-          @click="deleterecipe(id)"
-        >
-          delete {{ name }}
-        </button>
-        <button class="delete" @click="() => TogglePopup('buttonTrigger')">
-          Cancel
-        </button>
-      </div>
+  </div>
+  <div
+    class="popup"
+    id="popup"
+    v-if="popupTriggers.buttonTrigger"
+    :TogglePopup="() => TogglePopup('buttonTrigger')"
+  >
+    <div class="popup-inner">
+      <h2 class="pop-text">Are you sure you want to delete?</h2>
+      <button
+        :key="id"
+        v-for="{ id, name } in recipes"
+        class="delete"
+        @click="deleterecipe(id)"
+      >
+        delete {{ name }}
+      </button>
+      <button class="delete" @click="() => TogglePopup('buttonTrigger')">
+        Cancel
+      </button>
     </div>
   </div>
 </template>
@@ -95,12 +91,21 @@ export default {
 }
 .grid {
   display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 3;
-  grid-area: auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .column {
-
 }
 
 /* Remove extra left and right margins, due to padding */
