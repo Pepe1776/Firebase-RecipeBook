@@ -1,13 +1,6 @@
 <template>
   <div class="container">
     <div class="grid">
-      <!-- <div class="row">
-        <div>
-          <th scope="col">Name</th>
-          <th scope="col">description</th>
-          <th scope="col">Action</th>
-        </div>
-      </div> -->
       <div class="row">
         <div class="column">
           <div
@@ -29,24 +22,70 @@
                   Edit
                 </button>
               </router-link>
-              <button class="delete" @click="deleterecipe(id)">
+              <router-link :to="`/delete/${id}`">
+                <button class="delete">
+                  Delete
+                </button>
+              </router-link>
+              <!-- <button
+                class="delete"
+                @click="() => TogglePopup('buttonTrigger')"
+              >
                 Delete
-              </button>
+              </button> -->
+              <!-- <button class="delete" @click="deleterecipe(id)">
+                Delete
+              </button> -->
             </td>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="popup"
+      id="popup"
+      v-if="popupTriggers.buttonTrigger"
+      :TogglePopup="() => TogglePopup('buttonTrigger')"
+    >
+      <div class="popup-inner">
+        <h2 class="pop-text">Are you sure you want to delete?</h2>
+        <button
+          :key="id"
+          v-for="{ id, name } in recipes"
+          class="delete"
+          @click="deleterecipe(id)"
+        >
+          delete {{ name }}
+        </button>
+        <button class="delete" @click="() => TogglePopup('buttonTrigger')">
+          Cancel
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 import { useLoadrecipes, deleterecipe } from '@/firebase'
 export default {
   setup() {
     const recipes = useLoadrecipes()
-    const deleteToggle = false
-    return { recipes, deleterecipe, deleteToggle }
+    const popup = document.getElementById('popup')
+    const popupTriggers = ref({
+      buttonTrigger: false
+    })
+    const TogglePopup = trigger => {
+      popupTriggers.value[trigger] = !popupTriggers.value[trigger]
+    }
+
+    return {
+      recipes,
+      deleterecipe,
+      TogglePopup,
+      popupTriggers,
+      popup
+    }
   }
 }
 </script>
@@ -54,10 +93,14 @@ export default {
 <style scoped>
 .container {
 }
+.grid {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 3;
+  grid-area: auto;
+}
 .column {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
+
 }
 
 /* Remove extra left and right margins, due to padding */
@@ -76,7 +119,7 @@ export default {
 @media screen and (max-width: 600px) {
   .column {
     width: 100%;
-    display: block;
+    display: inline-block;
     margin-bottom: 20px;
   }
 }
@@ -100,7 +143,30 @@ export default {
   margin: 1rem;
 }
 .image {
+  display: flex;
+  justify-content: center;
   width: 200px;
   border-radius: 30px;
+}
+.pop-text {
+  font-size: 3rem;
+  color: var(--blue-dark);
+}
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popup-inner {
+  background: #fff;
+  padding: 32px;
 }
 </style>

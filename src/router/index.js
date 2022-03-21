@@ -5,6 +5,7 @@ import RecipeDetail from '../components/RecipeDetail.vue'
 import RecipeCreate from '../components/RecipeCreate.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
+import Delete from '../views/Delete.vue'
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
     path: '/edit/:id',
     name: 'Edit',
     component: Edit
+  },
+  {
+    path: '/delete/:id',
+    name: 'Delete',
+    component: Delete
   },
   {
     path: '/recipe/:id',

@@ -14,7 +14,7 @@ const config = {
 const firebaseApp = firebase.initializeApp(config)
 
 const db = firebaseApp.firestore()
-const recipesCollection = db.collection('recipes')
+ export const recipesCollection = db.collection('recipes')
 
 export const createrecipe = recipe => {
   return recipesCollection.add(recipe)

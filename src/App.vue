@@ -1,14 +1,39 @@
 /* eslint-disable no-unused-vars */
-<template>
+<template id="printMe">
+  <!-- <button v-print="printObj">Print</button> -->
   <!-- <component :is="TopHeader"></component> -->
   <div class="container-app"></div>
   <h1>Recipes</h1>
   <router-view />
 </template>
 
-<script setup>
-// eslint-disable-next-line no-unused-vars
-// import TopHeader from './components/TopHeader.vue'
+<script>
+export default {
+  data() {
+    return {
+      printLoading: true,
+      printObj: {
+        id: 'printMe',
+        popTitle: 'good print',
+        extraCss:
+          'https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.compat.css, https://cdn.bootcdn.net/ajax/libs/hover.css/2.3.1/css/hover-min.css',
+        extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>',
+        beforeOpenCallback(vue) {
+          vue.printLoading = true
+          console.log('')
+        },
+        openCallback(vue) {
+          vue.printLoading = false
+          console.log('')
+        },
+        // eslint-disable-next-line no-unused-vars
+        closeCallback(vue) {
+          console.log('')
+        }
+      }
+    }
+  }
+}
 </script>
 
 <style>
@@ -59,7 +84,7 @@ body {
   background-color: #b9f7fc;
 }
 #app {
-   background-color: #c2f3f775;
+  background-color: #c2f3f775;
 }
 
 h1 {

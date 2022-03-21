@@ -1,9 +1,17 @@
 <template>
   <router-link class="back" to="/">&lt; Back</router-link>
   <div class="card card-body mt-4">
-    <h3 class="title">{{ form.name }}</h3>
+    <h3 class="title">Are you sure you want to delete {{ form.name }} ?</h3>
     <img :src="`${form.image}`" class="image" />
-    <br />
+    <div class="buttons">
+      <button v-bind:key="id" class="delete-btn" @click="deleted">
+        Delete
+      </button>
+      <router-link to="/"
+        ><button class="delete-btn">Cancel</button></router-link
+      >
+    </div>
+    <!-- <br />
     <p class="desc">{{ form.description }}</p>
     <div class="form-group mt-3">
       <label class="label">Ingredients</label>
@@ -28,18 +36,17 @@
           </li>
         </ol>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import { reactive, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getrecipe, updaterecipe } from '@/firebase'
+import { getrecipe, updaterecipe, deleterecipe } from '@/firebase'
 
 export default {
   setup() {
-    
     const router = useRouter()
     const route = useRoute()
     const recipeId = computed(() => route.params.id)
@@ -71,9 +78,13 @@ export default {
       form.name = ''
       form.description = ''
     }
+    const deleted = async () => {
+      await deleterecipe(recipeId.value)
+      router.push('/')
+    }
     const imgSrc = form.image
 
-    return { form, update, imgSrc }
+    return { form, update, deleted, imgSrc, deleterecipe }
   }
 }
 </script>
@@ -85,6 +96,7 @@ export default {
   object-fit: scale-down;
   aspect-ratio: 16 / 4;
   justify-content: center;
+  border-radius: 30px;
 }
 .recipe {
   padding: 1rem;
@@ -102,7 +114,7 @@ hr {
 }
 h3 {
   font-family: 'lobster', cursive;
-  font-size: 3.5rem;
+  font-size: 3rem;
   display: flex;
   justify-content: center;
   margin: 15px;
@@ -128,5 +140,13 @@ h3 {
   padding-bottom: 1rem;
   list-style-position: inside;
   border-bottom: 1px solid #eee;
+}
+.delete-btn {
+  width: 200px;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

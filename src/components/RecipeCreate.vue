@@ -42,10 +42,11 @@
         <label class="label" for="image url">Image Url</label>
         <input type="text" v-model="form.image" class="form-control" />
       </div>
-
-      <button type="submit" class="create">
-        Create recipe
-      </button>
+      <div class="button-con">
+        <button type="submit" class="create">
+          Create Recipe
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -53,9 +54,11 @@
 <script>
 import { createrecipe } from '@/firebase'
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
+    const router = useRouter()
     const form = reactive({
       name: '',
       description: '',
@@ -75,6 +78,7 @@ export default {
       form.ingredientRows = 1
       form.methodRows = 1
       form.image = ''
+      router.push('/')
     }
     const addNewIngredient = () => {
       form.ingredientRows++
@@ -89,7 +93,7 @@ export default {
 
 <style>
 .back {
-  font-family: "lobster", cursive;
+  font-family: 'lobster', cursive;
   font-size: 2.2rem;
   margin-left: 1rem;
   text-decoration: none;
@@ -118,13 +122,19 @@ label {
   align-items: center;
 }
 .form-control {
-  width: 70vw;
+  width: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .method {
   display: flex;
+}
+.button-con {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
 }
 .create {
   display: flex;

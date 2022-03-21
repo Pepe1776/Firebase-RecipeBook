@@ -104,7 +104,7 @@ export default {
 
 <style>
 .title {
-   font-family: 'lobster', cursive;
+  font-family: 'lobster', cursive;
   font-size: 3.5rem;
   display: flex;
   justify-content: center;
