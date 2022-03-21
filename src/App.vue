@@ -121,7 +121,7 @@ button {
   color: #f0f7ff;
   padding: 0.5rem 1rem;
   border-radius: 5rem;
-  transition: all 0.75s ease;
+  transition: all 0.5s ease;
 }
 button:hover {
   background-color: var(--main);

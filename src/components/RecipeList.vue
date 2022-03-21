@@ -7,7 +7,9 @@
         :key="id"
       >
         <td class="list-name">
-          <router-link :to="`/recipe/${id}`">{{ name }}</router-link>
+          <router-link class="list-name" :to="`/recipe/${id}`">{{
+            name
+          }}</router-link>
         </td>
         <td class="list-desc">{{ description }}</td>
         <td class="list-desc">
@@ -91,6 +93,8 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Righteous&display=swap');
+
 .container {
 }
 .grid {
@@ -145,7 +149,8 @@ export default {
   background-color: rgb(221, 250, 234);
 }
 .list-name {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
+  text-shadow: 0px 8px 20px #04d3e2, 2px 10px 30px rgba(34, 200, 250, 0.986);
   font-family: 'lobster', cursive;
   margin: 1rem;
 }
@@ -159,6 +164,14 @@ export default {
   justify-content: center;
   width: 200px;
   border-radius: 30px;
+  animation: all 2s ease-in-out;
+}
+.image:hover,
+.image:focus {
+  box-shadow: 0 8px 18px 0 rgba(0, 228, 245, 0.8);
+
+  animation: all 2s ease-in-out;
+  transform: translate(2px, 2px);
 }
 .pop-text {
   font-size: 3rem;
