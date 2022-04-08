@@ -11142,6 +11142,11 @@
     "vue-hot-reload-api" "^2.3.0"
     "vue-style-loader" "^4.1.0"
 
+"vue-loading-overlay@^5.0.3":
+  "integrity" "sha512-6JWZalwlHF4do3HXsFZGt6PcWYseAI5FuNKpveEkljkzqskDWRr7rYmYHVx2kKu4qIvK0vLpL25T/hpFMNoevQ=="
+  "resolved" "https://registry.npmjs.org/vue-loading-overlay/-/vue-loading-overlay-5.0.3.tgz"
+  "version" "5.0.3"
+
 "vue-print-nb@^1.7.5":
   "integrity" "sha512-iNbNyUVRWz0Ha1UTiCKxMPtHLUDGgNI8e8xmD3xqm9RlXIUeX9bT7DgNAfY8vPzqyFRHqGjxLI1rycKH366ziQ=="
   "resolved" "https://registry.npmjs.org/vue-print-nb/-/vue-print-nb-1.7.5.tgz"

@@ -11,6 +11,7 @@
       ><button class="add">Add a Recipe</button></router-link
     >
     <recipeList />
+    <p class="foot">Made by J Parker Dev</p>
   </div>
 </template>
 
@@ -19,11 +20,16 @@ import recipeList from '@/components/RecipeList.vue'
 
 export default {
   name: 'Home',
-  components: { recipeList }
+  components: { recipeList },
+  data() {
+    return {
+      showModal: false
+    }
+  }
 }
 </script>
 <script setup>
-import { ref, watchEffect } from 'vue' // used for conditional rendering
+import { ref } from 'vue' // used for conditional rendering
 import firebase from 'firebase'
 import { useRouter } from 'vue-router'
 import { onBeforeUnmount } from 'vue'
@@ -45,7 +51,9 @@ const signOut = () => {
 const authListener = firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
     // not logged in
-    alert('you must be logged in to view this. redirecting to the home page')
+    alert(
+      'you must be logged in to view recipes! redirecting to the login page'
+    )
     router.push('/login')
   }
 })
@@ -63,5 +71,11 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
 }
 </style>
