@@ -1,44 +1,49 @@
 <template>
-  <div>
-    <h3>Login</h3>
-    <form @submit.prevent="pressed">
-      <div class="login">
-        <input type="text" placeholder="login" v-model="email" />
-      </div>
-      <div class="password">
-        <input type="password" placeholder="password" v-model="password" />
-      </div>
-      <button>Login</button>
-    </form>
-    <div class="error" v-if="error">{{ error.message }}</div>
+  <h1>Login to Your Account</h1>
+  <div class="container">
+    <router-link to="/register"><button>Register</button></router-link>
+    <p><input type="text" placeholder="Email" v-model="email" /></p>
+    <p><input type="password" placeholder="Password" v-model="password" /></p>
+    <p v-if="errMsg">{{ errMsg }}</p>
+    <p><button @click="signIn">Submit</button></p>
   </div>
 </template>
 
-<script>
-import * as firebase from 'firebase/app'
-// import 'firebase/auth'
-export default {
-  data() {
-    return {
-      email: '',
-      password: '',
-      error: ''
-    }
-  },
-  methods: {
-    pressed() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(data => {
-          console.log(data)
-          this.$router.replace({ name: 'secret' })
-        })
-        .catch(error => {
-          this.error = error
-        })
-    }
-  }
+<script setup>
+import { ref } from 'vue'
+import firebase from 'firebase'
+import { useRouter } from 'vue-router' // import router
+const email = ref('')
+const password = ref('')
+const errMsg = ref() // ERROR MESSAGE
+const router = useRouter() // get a reference to our vue router
+// eslint-disable-next-line no-unused-vars
+const signIn = () => {
+  // we also renamed this method
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email.value, password.value) // THIS LINE CHANGED
+    // eslint-disable-next-line no-unused-vars
+    .then(data => {
+      console.log('Successfully logged in!')
+      router.push('/') // redirect to the feed
+    })
+    .catch(error => {
+      switch (error.code) {
+        case 'auth/invalid-email':
+          errMsg.value = 'Invalid email'
+          break
+        case 'auth/user-not-found':
+          errMsg.value = 'No account with that email was found'
+          break
+        case 'auth/wrong-password':
+          errMsg.value = 'Incorrect password'
+          break
+        default:
+          errMsg.value = 'Email or password was incorrect'
+          break
+      }
+    })
 }
 </script>
 
@@ -63,9 +68,15 @@ input {
 button {
   width: 400px;
   height: 75px;
-  font-size: 100%;
+  font-size: 42px;
 }
 .error {
   color: red;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
 }
 </style>
