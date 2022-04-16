@@ -38,6 +38,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,400&display=swap');
 
 * {
   --accent: #4aecf8;
@@ -58,7 +59,7 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'righteous', cursive;
+  font-family: 'Montserrat', sans-serif;
 }
 html {
   -webkit-background-size: cover;

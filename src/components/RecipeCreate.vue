@@ -25,6 +25,9 @@
         <button class="" type="button" @click="addNewIngredient">
           Add Ingredient
         </button>
+        <button class="" type="button" @click="removeIngredient">
+          Remove Ingredient
+        </button>
       </div>
       <div class="form-group mt-3">
         <label class="label">Methods</label>
@@ -37,6 +40,7 @@
           />
         </div>
         <button type="button" @click="addNewStep">Add Step</button>
+        <button type="button" @click="removeStep">Remove Step</button>
       </div>
       <div class="image form-group">
         <label class="label" for="image url">Image Url</label>
@@ -86,7 +90,20 @@ export default {
     const addNewStep = () => {
       form.methodRows++
     }
-    return { form, onSubmit, addNewIngredient, addNewStep }
+    const removeStep = () => {
+      form.methodRows--
+    }
+    const removeIngredient = () => {
+      form.ingredientRows--
+    }
+    return {
+      form,
+      onSubmit,
+      addNewIngredient,
+      addNewStep,
+      removeStep,
+      removeIngredient
+    }
   }
 }
 </script>
