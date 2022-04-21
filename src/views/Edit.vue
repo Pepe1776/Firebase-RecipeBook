@@ -138,7 +138,7 @@ export default {
   justify-content: center;
   margin: 15px;
   margin-bottom: 3rem;
-  text-shadow: 0px 8px 20px #04d3e2, 2px 10px 30px rgba(34, 250, 185, 0.986);
+  text-shadow: 0px 8px 20px #04d3e272, 2px 10px 30px rgba(34, 250, 185, 0.546);
 }
 .btn::before,
 .btn::after {

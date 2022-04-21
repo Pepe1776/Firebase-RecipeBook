@@ -41,15 +41,15 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,400&display=swap');
 
 * {
-  --accent: #4aecf8;
+  --accent: #abf5fa;
   --main: #04d3e2;
   --main-dark: #00becc;
   --main-darker: #00919c;
-  --dark: #292929;
+  --dark: #292929bc;
   --blue: #02a4af;
   --blue-dark: #00848d;
   --blue-darker: #016a72;
-  --blue-darkest: #014347;
+  --blue-darkest: #014347b5;
   --light: #e1e1e1;
   --lighter: #f1f1f1;
   --lightest: #ffffff;
@@ -94,7 +94,7 @@ h1 {
   display: flex;
   justify-content: center;
   margin: 5px;
-  text-shadow: 0px 8px 20px #04d3e2, 2px 10px 30px rgba(34, 200, 250, 0.986);
+  text-shadow: 0px 8px 20px #04d3e296, 2px 10px 30px rgba(34, 200, 250, 0.986);
 }
 @keyframes movingGradient {
   from {
@@ -117,16 +117,17 @@ button {
   cursor: pointer;
   margin: 5px;
 
-  background-color: var(--dark);
+  background-color: var(--lightest);
   font-size: 1.5rem;
-  color: #f0f7ff;
+  color: #060606;
   padding: 0.5rem 1rem;
   border-radius: 5rem;
   transition: all 0.5s ease;
+  box-shadow: 0 8px 18px rgba(1, 103, 110, 0.8);
 }
 button:hover {
-  background-color: var(--main);
-  color: var(--dark);
+  background-color: var(--accent);
+  color: #060606;
   transform: scale(1.05);
   box-shadow: 0 8px 18px rgba(1, 103, 110, 0.8);
 }
